@@ -1,8 +1,7 @@
 pipeline {
     environment {
         registry = "inf/"
-        registryCredential = 'Harbor'
-        dockerImageName = "hello-world-java"
+        imageName = "hello-world-java"
     }
     agent any
     stages {
@@ -29,27 +28,28 @@ pipeline {
   
        stage('Building image') {
           steps{
-	  sh "mv ./target/hello*.jar ./data" 
+
 	  script {
 	    def dockerfile = 'Dockerfile'
    	    def customImage = docker.build("${dockerImageName}:${env.BUILD_ID}", "-f ${dockerfile} ./") 
 	   }
          }
        }
-    stage('Deploy Image') {
-      steps{
-        script {
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
-        }
-      }
-    }
-    stage('Remove Unused docker image') {
-      steps{
-        sh "docker rmi $registry:$BUILD_NUMBER"
-      }
-    }
-  }
 
+  }
+  post {
+    always {
+      archive 'target/**/*.jar'
+      junit 'target/**/*.xml'
+      cucumber '**/*.json'
+    }
+    success {
+      withCredentials([usernamePassword(credentialsId: 'Harbor', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+        sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+        sh "docker push ${registry}/${imageName}:${env.BUILD_ID}"
+        sh "docker push ${registry}/${imageName}:latest"
+      }
+    }
 }
+
+
