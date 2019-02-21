@@ -1,16 +1,16 @@
 pipeline {
-
+    environment {
+        registry = "inf"
+        registryCredential = '192.168.122.75'
+        dockerImageName = "hello-world-java"
+        dockerImage =  "${registryCredential}/${registry}/${dockerImageName}:${env.BUILD_NUMBER}"
+    }
     agent {
         docker {
             image 'maven:3-alpine'
             args '-v /root/.m2:/root/.m2'
         }
     }
-  
-    
-    def dockerRepoUrl = "192.168.122.75"
-    def dockerImageName = "hello-world-java"
-    def dockerImageTag = "${dockerRepoUrl}/${dockerImageName}:${env.BUILD_NUMBER}"
     
     stages {
    	stage('Build') {
