@@ -9,6 +9,7 @@ EXPOSE 8180
 #COPY files/index.html.template /usr/share/nginx/html/index.html.template
 #VOLUME /tmp
 
-ENTRYPOINT ["java","-jar","/opt/app.jar"]
+#ENTRYPOINT ["java","-jar","/opt/app.jar"]
 #ADD ["target/*.jar", "/opt/apt.jar"]
 COPY target/*.jar /opt/app.jar
+COPY  data/.gitignore /opt/
