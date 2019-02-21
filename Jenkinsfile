@@ -4,14 +4,15 @@ pipeline {
         registryCredential = '192.168.122.75'
         dockerImageName = "hello-world-java"
     }
-    agent  {
-        agent none
-        stage('Back-end') {
+    
+    agent none
+    stages { 
+       stage('Back-end') {
             agent {
-               docker {
-		  image 'maven:3-alpine'
-		  args '-v /root/.m2:/root/.m2'
-	       }
+                docker { 
+		     image 'maven:3-alpine'
+		     args '-v /root/.m2:/root/.m2'
+		 }
             }
             steps {
                 sh 'mvn --version'
@@ -25,8 +26,7 @@ pipeline {
                 sh 'node --version'
             }
         }
-    }
-    stages { 
+	    
    	stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
