@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        registry = "inf"
+        registry = "192.168.122.75/inf"
         imageName = "hello-world-java"
     }
     agent any
@@ -41,7 +41,7 @@ pipeline {
 	    steps {
 	      script {
 	    	withCredentials([usernamePassword(credentialsId: 'Harbor', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-		  sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+		  sh "docker login -u ${USERNAME} -p ${PASSWORD} 192.168.122.75"
 		  sh "docker push ${registry}/${imageName}:${env.BUILD_ID}"
 		  sh "docker push ${registry}/${imageName}:latest"
 	        }
