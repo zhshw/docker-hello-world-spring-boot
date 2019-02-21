@@ -11,4 +11,4 @@ EXPOSE 8180
 
 ENTRYPOINT ["java","-jar","/opt/app.jar"]
 #ADD ["target/*.jar", "/opt/apt.jar"]
-COPY . /opt/
+COPY target/*.jar /opt/
