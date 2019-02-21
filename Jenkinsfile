@@ -31,7 +31,7 @@ pipeline {
 
 	  script {
 	    def dockerfile = 'Dockerfile'
-   	    def customImage = docker.build("${dockerImageName}:${env.BUILD_ID}", "-f ${dockerfile} ./") 
+   	    def customImage = docker.build("${registry}/${imageName}:${env.BUILD_ID}", "-f ${dockerfile} ./") 
 	   }
          }
        }
