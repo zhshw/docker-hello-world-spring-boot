@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        registry = "inf/"
+        registry = "inf"
         imageName = "hello-world-java"
     }
     agent any
