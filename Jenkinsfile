@@ -1,7 +1,7 @@
 pipeline {
     environment {
         registry = "inf/"
-        registryCredential = '192.168.122.75'
+        registryCredential = 'Harbor'
         dockerImageName = "hello-world-java"
     }
     agent any
@@ -9,7 +9,7 @@ pipeline {
         stage('Back-end') {
             agent {
                 docker { image 'maven:3-alpine' 
-		        args '-v /root/.m2:/root/.m2'
+		        args '-v /root/.m2:/root/.m2 -v '
 		}
             }
             steps {
