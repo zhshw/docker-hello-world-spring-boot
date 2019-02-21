@@ -14,7 +14,6 @@ pipeline {
             steps {
                 sh 'mvn --version'
 		sh 'mvn -B -DskipTests clean package'
-	        sh "mv ./target/*.jar ./data" 
             }
         }
         stage('Front-end') {
