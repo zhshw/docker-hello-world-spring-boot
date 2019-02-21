@@ -4,7 +4,7 @@ FROM openjdk:8-jdk-alpine
 #maintainer 
 MAINTAINER xxxx@xxx.com
 
-EXPOSE 8081
+EXPOSE 8080
 
 COPY target/*.jar /opt/app.jar
 
