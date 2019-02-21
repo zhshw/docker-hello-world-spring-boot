@@ -39,9 +39,7 @@ pipeline {
   }
   post {
     always {
-      archive 'target/**/*.jar'
-      junit 'target/**/*.xml'
-      cucumber '**/*.json'
+      archive 'target/*.jar'
     }
     success {
       withCredentials([usernamePassword(credentialsId: 'Harbor', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
