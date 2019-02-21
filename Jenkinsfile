@@ -3,7 +3,6 @@ pipeline {
         registry = "inf/"
         registryCredential = '192.168.122.75'
         dockerImageName = "hello-world-java"
-        dockerImage =  "${registry}/${dockerImageName}:${env.BUILD_NUMBER}"
     }
     agent none
     stages {
@@ -44,7 +43,8 @@ pipeline {
           steps{
 	  sh "mv ./target/hello*.jar ./data" 
 	  script {
-	      dockerImage = docker.build dockerImage -f ./Dockerfile"
+	    def dockerfile = 'Dockerfile'
+   	    def customImage = docker.build("${dockerImageName}:${env.BUILD_ID}", "-f ${dockerfile} ./deploy") 
 	   }
          }
        }
