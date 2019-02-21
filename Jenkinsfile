@@ -44,7 +44,7 @@ pipeline {
 	  sh "mv ./target/hello*.jar ./data" 
 	  script {
 	    def dockerfile = 'Dockerfile'
-   	    def customImage = docker.build("${dockerImageName}:${env.BUILD_ID}", "-f ${dockerfile} ./deploy") 
+   	    def customImage = docker.build("${dockerImageName}:${env.BUILD_ID}", "-f ${dockerfile} ./") 
 	   }
          }
        }
