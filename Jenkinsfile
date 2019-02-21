@@ -28,7 +28,9 @@ pipeline {
        stage('Build Docker Image') {
 	    steps {
 	       sh "mv ./target/hello*.jar ./data" 
-	       dockerImage = docker.build("hello-world-java")
+	       script {
+	           dockerImage = docker.build("hello-world-java")
+	       }
 	    }
 	}
 	   
