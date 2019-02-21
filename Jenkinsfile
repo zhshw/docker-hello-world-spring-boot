@@ -3,7 +3,7 @@ pipeline {
         registry = "inf/"
         registryCredential = '192.168.122.75'
         dockerImageName = "hello-world-java"
-        dockerImage =  "${registryCredential}/${registry}/${dockerImageName}:${env.BUILD_NUMBER}"
+        dockerImage =  "${registry}/${dockerImageName}:${env.BUILD_NUMBER}"
     }
     agent none
     stages {
