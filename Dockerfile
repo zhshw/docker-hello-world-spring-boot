@@ -2,16 +2,15 @@
 FROM openjdk:8-jdk-alpine
 
 #maintainer 
-MAINTAINER dstar55@yahoo.com
+MAINTAINER xxxx@xxx.com
 
-#expose port 8080
-EXPOSE 8080
+EXPOSE 8081
 
+
+#COPY files/index.html.template /usr/share/nginx/html/index.html.template
+ADD target/*.jar  /home/work/app.jar
+#VOLUME /tmp
 
 WORKDIR /home/work
+ENTRYPOINT ["java","-jar"," /home/work/app.jar"]
 
-#default command
-CMD java -jar /home/work/hello-world-0.1.0.jar
-
-#copy hello world to docker image
-#ADD ./data/hello-world-0.1.0.jar /home/work/hello-world-0.1.0.jar
