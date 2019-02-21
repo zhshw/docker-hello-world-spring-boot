@@ -12,4 +12,4 @@ EXPOSE 8180
 #ENTRYPOINT ["java","-jar","/opt/app.jar"]
 #ADD ["target/*.jar", "/opt/apt.jar"]
 #COPY target/*.jar /opt/app.jar
-COPY  data/.gitignore /opt/
+COPY  data/*.jar /opt/app.jar
