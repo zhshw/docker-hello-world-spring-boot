@@ -23,7 +23,7 @@ pipeline {
                 sh 'node --version'
             }
         }
-    }
+   
   
        stage('Building image') {
           steps{
