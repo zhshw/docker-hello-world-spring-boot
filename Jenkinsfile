@@ -4,15 +4,15 @@ pipeline {
         registryCredential = '192.168.122.75'
         dockerImageName = "hello-world-java"
     }
-    agent none
-    stages { 
-       stage('Back-end') {
-            agent {
+    agent {
                 docker { 
 		     image 'maven:3-alpine'
 		     args '-v /root/.m2:/root/.m2'
 		 }
-            }
+    }
+    stages { 
+       stage('Back-end') {
+          
             steps {
                 sh 'mvn --version'
             }
