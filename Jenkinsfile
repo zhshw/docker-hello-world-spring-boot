@@ -4,8 +4,8 @@ pipeline {
         registryCredential = '192.168.122.75'
         dockerImageName = "hello-world-java"
     }
-    agent none
-    stages {
+    agent  {
+        agent none
         stage('Back-end') {
             agent {
                docker {
