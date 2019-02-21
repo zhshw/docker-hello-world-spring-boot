@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        registry = "inf"
+        registry = "inf/"
         registryCredential = '192.168.122.75'
         dockerImageName = "hello-world-java"
         dockerImage =  "${registryCredential}/${registry}/${dockerImageName}:${env.BUILD_NUMBER}"
@@ -44,7 +44,7 @@ pipeline {
           steps{
 	  sh "mv ./target/hello*.jar ./data" 
 	  script {
-	      dockerImage = docker.build registry + ":$BUILD_NUMBER"
+	      dockerImage = docker.build dockerImage -f ./Dockerfile"
 	   }
          }
        }
