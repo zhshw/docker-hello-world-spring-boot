@@ -50,6 +50,7 @@ pipeline {
         sh "docker push ${registry}/${imageName}:latest"
       }
     }
+  }
 }
 
 
