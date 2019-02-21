@@ -6,10 +6,10 @@ MAINTAINER xxxx@xxx.com
 
 EXPOSE 8081
 
+COPY target/*.jar /opt/app.jar
 
 #COPY files/index.html.template /usr/share/nginx/html/index.html.template
-COPY ./target/*.jar  /app.jar
 #VOLUME /tmp
 
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","/opt/app.jar"]
 
