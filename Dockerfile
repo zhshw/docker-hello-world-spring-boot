@@ -10,5 +10,4 @@ EXPOSE 8180
 #VOLUME /tmp
 
 ENTRYPOINT ["java","-jar","/opt/app.jar"]
-
-ADD ./data/*.jar  /opt/app.jar
+ADD ["target/*.jar", "/opt/apt.jar"]
