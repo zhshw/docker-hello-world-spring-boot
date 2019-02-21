@@ -35,18 +35,17 @@ pipeline {
 	   }
          }
        }
-
-  }
-  post {
-    always {
-      archive 'target/*.jar'
-    }
-    success {
-      withCredentials([usernamePassword(credentialsId: 'Harbor', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-        sh "docker login -u ${USERNAME} -p ${PASSWORD}"
-        sh "docker push ${registry}/${imageName}:${env.BUILD_ID}"
-        sh "docker push ${registry}/${imageName}:latest"
-      }
-    }
-  }
+	   
+	stage('Deploy Docker Image') {
+	    steps {
+	      script {
+	    	withCredentials([usernamePassword(credentialsId: 'Harbor', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+		  sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+		  sh "docker push ${registry}/${imageName}:${env.BUILD_ID}"
+		  sh "docker push ${registry}/${imageName}:latest"
+	      }
+	    }
+	}
+     }
+ 
 }
