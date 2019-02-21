@@ -32,7 +32,8 @@ pipeline {
 
 	  script {
 	    def dockerfile = 'Dockerfile'
-   	    def customImage = docker.build("${registry}/${imageName}:${env.BUILD_ID}", "-f ${dockerfile} ./") 
+   	    docker.build("${registry}/${imageName}:${env.BUILD_ID}", "-f ${dockerfile} ./") 
+	    sh "docker tag ${registry}/${imageName}:${env.BUILD_ID}  ${registry}/${imageName}:latest
 	   }
          }
        }
