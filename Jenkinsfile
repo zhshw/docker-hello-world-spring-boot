@@ -5,14 +5,6 @@ pipeline {
         dockerImageName = "hello-world-java"
         dockerImage =  "${registryCredential}/${registry}/${dockerImageName}:${env.BUILD_NUMBER}"
     }
-    agent {
-       docker {
-          image 'maven:3-alpine'
-          args '-v /root/.m2:/root/.m2'
-       }
-       docker { image 'node:7-alpine' }
-
-    }
     stages { 
         stage('Back-end') {
 	    agent {
