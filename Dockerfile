@@ -8,9 +8,8 @@ EXPOSE 8081
 
 
 #COPY files/index.html.template /usr/share/nginx/html/index.html.template
-ADD target/*.jar  /home/work/app.jar
+ADD ./target/*.jar  /app.jar
 #VOLUME /tmp
 
-WORKDIR /home/work
-ENTRYPOINT ["java","-jar"," /home/work/app.jar"]
+ENTRYPOINT ["java","-jar","/app.jar"]
 
