@@ -14,7 +14,6 @@ pipeline {
             steps {
                 sh 'mvn --version'
 		sh 'mvn -B -DskipTests clean package'
-		 sh 'echo $(pwd)'
             }
         }
      
@@ -22,7 +21,7 @@ pipeline {
        stage('Building image') {
           steps{
 	    sh 'echo `pwd`'
-   	    sh "docker build -t  ${registry}/${imageName}:${env.BUILD_ID} /var/jenkins_home/workspace/hello_master@2" 
+   	    sh "docker build -t  ${registry}/${imageName}:${env.BUILD_ID} `pwd`" 
 	    sh "docker tag ${registry}/${imageName}:${env.BUILD_ID}  ${registry}/${imageName}:latest"
 	
          }
