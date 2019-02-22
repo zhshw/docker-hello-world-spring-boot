@@ -23,10 +23,10 @@ pipeline {
           steps{
 
 	  script {
-	    sh 'echo $(pwd)'
-	    sh 'cd $(pwd)@2'
+	    sh 'path=`pwd`'
+
 	    def dockerfile = 'Dockerfile'
-   	    sh "docker build -t  ${registry}/${imageName}:${env.BUILD_ID} ." 
+   	    sh "docker build -t  ${registry}/${imageName}:${env.BUILD_ID} -f $path" 
 	    sh "docker tag ${registry}/${imageName}:${env.BUILD_ID}  ${registry}/${imageName}:latest"
 	   }
          }
