@@ -14,14 +14,13 @@ pipeline {
             steps {
                 sh 'mvn --version'
 		sh 'mvn -B -DskipTests clean package'
-		sh 'mv target/*.jar data/'
             }
         }
      
   
        stage('Building image') {
           steps{
-
+	    sh 'mv target/*.jar ./'
 	  script {
 	    def dockerfile = 'Dockerfile'
    	    sh "docker build -t  ${registry}/${imageName}:${env.BUILD_ID} ." 
