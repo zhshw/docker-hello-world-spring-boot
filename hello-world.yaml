@@ -1,0 +1,34 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: hello-world-java
+spec:
+  selector:
+    app: hello-world-java
+  ports:
+  - protocol: TCP
+    port: 8080
+    nodePort: 30001
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-java
+  labels:
+    app: hello-world-java
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: hello-world-java
+  template:
+    metadata:
+      labels:
+        app: hello-world-java
+    spec:
+      containers:
+      - name: hello-world-java
+        image: 192.168.122.75/inf/hello-world-java:latest
+        ports:
+        - containerPort: 80
