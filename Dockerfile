@@ -9,9 +9,6 @@ EXPOSE 8180
 #COPY files/index.html.template /usr/share/nginx/html/index.html.template
 VOLUME /tmp
 
-#ENTRYPOINT ["java","-jar","/opt/app.jar"]
+ENTRYPOINT ["java","-jar","/opt/app.jar"]
 
-CMD java -jar /opt/app.jar
-
-#copy hello world to docker image
-ADD target/hello-world-0.1.0.jar /opt/app.jar
+ADD target/hello-world-*.jar /opt/app.jar
