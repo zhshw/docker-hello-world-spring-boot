@@ -23,6 +23,7 @@ pipeline {
 
 	  script {
 	    sh 'echo $(pwd)'
+	    sh 'cd $(pwd)@2'
 	    def dockerfile = 'Dockerfile'
    	    sh "docker build -t  ${registry}/${imageName}:${env.BUILD_ID} ." 
 	    sh "docker tag ${registry}/${imageName}:${env.BUILD_ID}  ${registry}/${imageName}:latest"
