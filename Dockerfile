@@ -11,8 +11,7 @@ VOLUME /tmp
 
 #ENTRYPOINT ["java","-jar","/opt/app.jar"]
 
-CMD java -jar /opt/hello-world-0.1.0.jar
+CMD java -jar /opt/app.jar
 
 #copy hello world to docker image
-ADD ./hello-world-0.1.0.jar /opt/hello-world-0.1.0.jar
-ADD ./a.txt  /opt/a.txt
+ADD ./target/*.jar /opt/
