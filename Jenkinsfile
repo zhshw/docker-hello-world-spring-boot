@@ -12,6 +12,7 @@ pipeline {
 		}
             }
             steps {
+	        sh "echo ${env.WORKSPACE}"
                 sh 'mvn --version'
 		sh 'mvn -B -DskipTests clean package'
 	        sh 'echo `pwd`'
@@ -24,7 +25,7 @@ pipeline {
        stage('Building image') {
           steps{
 	    sh 'echo `pwd`'
-   	    sh "docker build -t  ${registry}/${imageName}:${env.BUILD_ID} ${env.WORKSPACE}" 
+   	    sh "docker build -t  ${registry}/${imageName}:${env.BUILD_ID} ${env.WORKSPACE}@2" 
 	    sh "docker tag ${registry}/${imageName}:${env.BUILD_ID}  ${registry}/${imageName}:latest"
 	
          }
