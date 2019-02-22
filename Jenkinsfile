@@ -12,19 +12,26 @@ pipeline {
 		}
             }
             steps {
-	        sh "echo ${env.WORKSPACE}"
                 sh 'mvn --version'
 		sh 'mvn -B -DskipTests clean package'
-	        sh 'echo `pwd`'
 	        sh "echo ${env.WORKSPACE}"
 	        archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
             }
         }
      
+        stage('Front-end') {
+            agent {
+                docker { image 'node:7-alpine' }
+            }
+            steps {
+                sh 'node --version'
+	        sh "echo ${env.WORKSPACE}"
+            }
+        }
   
        stage('Building image') {
           steps{
-	    sh 'echo `pwd`'
+	    sh "echo  ${env.WORKSPACE}"
    	    sh "docker build -t  ${registry}/${imageName}:${env.BUILD_ID} ${env.WORKSPACE}@2" 
 	    sh "docker tag ${registry}/${imageName}:${env.BUILD_ID}  ${registry}/${imageName}:latest"
 	
