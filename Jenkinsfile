@@ -22,7 +22,7 @@ pipeline {
        stage('Building image') {
           steps{
 	    sh 'echo `pwd`'
-   	    sh "docker build -t  ${registry}/${imageName}:${env.BUILD_ID} ." 
+   	    sh "docker build -t  ${registry}/${imageName}:${env.BUILD_ID} /var/jenkins_home/workspace/hello_master@2" 
 	    sh "docker tag ${registry}/${imageName}:${env.BUILD_ID}  ${registry}/${imageName}:latest"
 	
          }
