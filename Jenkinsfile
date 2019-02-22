@@ -2,6 +2,7 @@ pipeline {
     environment {
         registry = "192.168.122.75/inf"
         imageName = "hello-world-java"
+	build_path = `pwd`
     }
     agent any
     stages {
@@ -15,6 +16,7 @@ pipeline {
                 sh 'mvn --version'
 		sh 'mvn -B -DskipTests clean package'
 	        sh 'echo `pwd`'
+	        sh "echo ${build_path}"
             }
         }
      
@@ -22,7 +24,7 @@ pipeline {
        stage('Building image') {
           steps{
 	    sh 'echo `pwd`'
-   	    sh "docker build -t  ${registry}/${imageName}:${env.BUILD_ID} `pwd`" 
+   	    sh "docker build -t  ${registry}/${imageName}:${env.BUILD_ID} ${build_path}" 
 	    sh "docker tag ${registry}/${imageName}:${env.BUILD_ID}  ${registry}/${imageName}:latest"
 	
          }
