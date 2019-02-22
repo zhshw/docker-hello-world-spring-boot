@@ -16,6 +16,7 @@ pipeline {
 		sh 'mvn -B -DskipTests clean package'
 	        sh 'echo `pwd`'
 	        sh "echo ${env.WORKSPACE}"
+	        archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
             }
         }
      
@@ -23,7 +24,7 @@ pipeline {
        stage('Building image') {
           steps{
 	    sh 'echo `pwd`'
-   	    sh "docker build -t  ${registry}/${imageName}:${env.BUILD_ID} ${env.WORKSPACE}" 
+   	    sh "docker build -t  ${registry}/${imageName}:${env.BUILD_ID} ${env.WORKSPACE}@2" 
 	    sh "docker tag ${registry}/${imageName}:${env.BUILD_ID}  ${registry}/${imageName}:latest"
 	
          }
