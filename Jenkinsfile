@@ -15,7 +15,6 @@ pipeline {
                 sh 'mvn --version'
 		sh 'mvn -B -DskipTests clean package'
 	        sh "echo ${env.WORKSPACE}"
-	        archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
             }
         }
      
