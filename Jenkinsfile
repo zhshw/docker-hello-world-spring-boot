@@ -15,6 +15,7 @@ pipeline {
                 sh 'mvn --version'
 		sh 'mvn -B -DskipTests clean package install'
 	         sh 'mv target/*.jar ./'
+		    sh 'touch ./a.txt'
             }
         }
      
