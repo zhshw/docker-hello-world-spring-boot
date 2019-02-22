@@ -14,6 +14,7 @@ pipeline {
             steps {
                 sh 'mvn --version'
 		sh 'mvn -B -DskipTests clean package'
+		 sh 'echo $(pwd)'
             }
         }
      
