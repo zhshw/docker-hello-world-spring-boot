@@ -21,14 +21,11 @@ pipeline {
   
        stage('Building image') {
           steps{
-
-	  script {
-	    sh 'path=`pwd`'
-
+	    sh 'echo `pwd`'
 	    def dockerfile = 'Dockerfile'
-   	    sh "docker build -t  ${registry}/${imageName}:${env.BUILD_ID} -f $path" 
+   	    sh "docker build -t  ${registry}/${imageName}:${env.BUILD_ID} ." 
 	    sh "docker tag ${registry}/${imageName}:${env.BUILD_ID}  ${registry}/${imageName}:latest"
-	   }
+	
          }
        }
 	   
